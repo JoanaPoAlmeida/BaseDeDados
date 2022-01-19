@@ -1,0 +1,283 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Freq Radiacao",
+                              "component": "freq_radiacao",
+                              "name": "freq_radiacaoLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "int",
+                              "type": "numeric",
+                              "name": "freq_radiacao",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${nivelradiacao.freq_radiacao}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "freq_radiacaoRequiredValidator",
+                              "component": "freq_radiacao",
+                              "text": "freq_radiacao is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Sensor",
+                              "component": "id_sensor",
+                              "name": "id_sensorLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getSensorsResult}",
+                              "textProperty": "tipo_sensor",
+                              "valueProperty": "id_sensor",
+                              "placeholder": "Choose Sensor",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "id_sensor",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${nivelradiacao.id_sensor}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "id_sensorRequiredValidator",
+                              "component": "id_sensor",
+                              "text": "id_sensor is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Valor Referencium",
+                              "component": "id_referencia",
+                              "name": "id_referenciaLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "data": "${getValorReferenciaResult}",
+                              "textProperty": "id_referencia",
+                              "valueProperty": "id_referencia",
+                              "placeholder": "Choose ValorReferencium",
+                              "valueType": "int",
+                              "type": "dropdown",
+                              "name": "id_referencia",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${nivelradiacao.id_referencia}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "id_referenciaRequiredValidator",
+                              "component": "id_referencia",
+                              "text": "id_referencia is required",
+                              "style": {
+                                "position": "absolute"
+                              },
+                              "defaultValue": "0"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new NivelRadiacao!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "radnetBD.createNivelRadiacao",
+                        "parameters": [
+                          {
+                            "name": "NivelRadiacao",
+                            "value": "${nivelradiacao}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${nivelradiacao}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "data": "${nivelradiacao}",
+                  "visible": "${nivelradiacao != null}",
+                  "itemType": "Radnet.Models.RadnetBd.NivelRadiacao"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "radnetBD.getSensors",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getSensorsResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<Radnet.Models.RadnetBd.Sensor>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "radnetBD.getValorReferencia",
+        "parameters": [],
+        "then": [
+          {
+            "name": "getValorReferenciaResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<Radnet.Models.RadnetBd.ValorReferencium>"
+          }
+        ],
+        "type": "invoke"
+      },
+      {
+        "name": "nivelradiacao",
+        "type": "set",
+        "value": "new Radnet.Models.RadnetBd.NivelRadiacao(){}",
+        "valueType": "Radnet.Models.RadnetBd.NivelRadiacao"
+      }
+    ]
+  },
+  "name": "Add Nivel Radiacao",
+  "layout": "Main"
+}

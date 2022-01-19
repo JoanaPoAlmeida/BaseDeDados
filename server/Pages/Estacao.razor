@@ -1,0 +1,40 @@
+﻿@page "/"
+@page "/estacao"
+@layout MainLayout
+@inherits Radnet.Pages.EstacaoComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Radnet.Models.RadnetBd
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Estacao">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add" Click="@Button0Click">
+        </RadzenButton>
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getEstacaosResult" TItem="Radnet.Models.RadnetBd.Estacao" RowSelect="@Grid0RowSelect">
+          <Columns>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Estacao" Property="id_estacao" Title="Id Estacao">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Estacao" Property="tipo_estacao" Title="Tipo Estacao">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Estacao" Property="freq_leitura" Title="Freq Leitura">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Estacao" Property="localizacao" Title="Localizacao">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Estacao" Property="data_instalacao" FormatString="{0:d}" Title="Data Instalacao">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Estacao" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+              <Template Context="radnetModelsRadnetBdEstacao">
+                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small" Click="@((args) =>GridDeleteButtonClick(args, radnetModelsRadnetBdEstacao))" @onclick:stopPropagation="true">
+                </RadzenButton>
+              </Template>
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

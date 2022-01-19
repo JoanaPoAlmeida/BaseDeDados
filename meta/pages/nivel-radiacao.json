@@ -1,0 +1,192 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "NivelRadiacao"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "icon": "add_circle_outline",
+                  "name": "button0",
+                  "style": {
+                    "marginBottom": "10px"
+                  },
+                  "text": "Add",
+                  "type": "button",
+                  "events": {
+                    "click": [
+                      {
+                        "path": "add-nivel-radiacao",
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "grid0",
+                  "allowFiltering": true,
+                  "filterMode": "advanced",
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "data": "${getNivelRadiacaosResult}",
+                  "events": {
+                    "loadData": [],
+                    "rowSelect": [
+                      {
+                        "parameters": [
+                          {
+                            "name": "id_nivel",
+                            "value": "${event.id_nivel}"
+                          }
+                        ],
+                        "path": "edit-nivel-radiacao",
+                        "type": "popup",
+                        "then": [
+                          {
+                            "code": "await grid0.Reload();",
+                            "type": "execute"
+                          },
+                          {
+                            "code": "await InvokeAsync(() => { StateHasChanged(); });",
+                            "type": "execute"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "id_nivel",
+                      "title": "Id Nivel"
+                    },
+                    {
+                      "property": "freq_radiacao",
+                      "title": "Freq Radiacao"
+                    },
+                    {
+                      "property": "id_sensor",
+                      "sortProperty": "Sensor.tipo_sensor",
+                      "groupProperty": "Sensor.tipo_sensor",
+                      "filterProperty": "Sensor.tipo_sensor",
+                      "template": "${data.Sensor?.tipo_sensor}",
+                      "title": "Sensor"
+                    },
+                    {
+                      "property": "id_referencia",
+                      "sortProperty": "ValorReferencium.id_referencia",
+                      "groupProperty": "ValorReferencium.id_referencia",
+                      "filterProperty": "ValorReferencium.id_referencia",
+                      "template": "${data.ValorReferencium?.id_referencia}",
+                      "title": "Valor Referencium"
+                    },
+                    {
+                      "filterable": false,
+                      "sortable": false,
+                      "width": "70px",
+                      "textAlign": "center",
+                      "template": [
+                        {
+                          "attributes": [
+                            {
+                              "name": "@onclick:stopPropagation",
+                              "value": true
+                            }
+                          ],
+                          "buttonStyle": "danger",
+                          "icon": "close",
+                          "name": "gridDeleteButton",
+                          "text": "",
+                          "size": "sm",
+                          "type": "button",
+                          "events": {
+                            "click": [
+                              {
+                                "condition": "await DialogService.Confirm(\"Are you sure you want to delete this record?\") == true",
+                                "error": [
+                                  {
+                                    "detail": "Unable to delete NivelRadiacao",
+                                    "severity": "error",
+                                    "summary": "Error",
+                                    "type": "notify"
+                                  }
+                                ],
+                                "name": "radnetBD.deleteNivelRadiacao",
+                                "parameters": [
+                                  {
+                                    "name": "id_nivel",
+                                    "value": "${data.id_nivel}"
+                                  }
+                                ],
+                                "then": [
+                                  {
+                                    "code": "await grid0.Reload();",
+                                    "condition": "result != null",
+                                    "type": "execute"
+                                  }
+                                ],
+                                "type": "invoke"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "type": "datagrid",
+                  "itemType": "Radnet.Models.RadnetBd.NivelRadiacao"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "radnetBD.getNivelRadiacaos",
+        "parameters": [
+          {
+            "name": "$expand",
+            "value": "ValorReferencium,Sensor"
+          }
+        ],
+        "then": [
+          {
+            "name": "getNivelRadiacaosResult",
+            "type": "set",
+            "value": "${result}",
+            "valueType": "IEnumerable<Radnet.Models.RadnetBd.NivelRadiacao>"
+          }
+        ],
+        "type": "invoke"
+      }
+    ]
+  },
+  "name": "NivelRadiacao",
+  "layout": "Main"
+}

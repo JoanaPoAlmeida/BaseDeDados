@@ -1,0 +1,247 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Vr Diario",
+                              "component": "VR_diario",
+                              "name": "VR_diarioLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "double",
+                              "type": "numeric",
+                              "name": "VR_diario",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${valorreferencium.VR_diario}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "VR_diarioRequiredValidator",
+                              "component": "VR_diario",
+                              "text": "VR_diario is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Vr Mensal",
+                              "component": "VR_mensal",
+                              "name": "VR_mensalLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "double",
+                              "type": "numeric",
+                              "name": "VR_mensal",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${valorreferencium.VR_mensal}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "VR_mensalRequiredValidator",
+                              "component": "VR_mensal",
+                              "text": "VR_mensal is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Vr Anual",
+                              "component": "VR_anual",
+                              "name": "VR_anualLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "double",
+                              "type": "numeric",
+                              "name": "VR_anual",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${valorreferencium.VR_anual}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "VR_anualRequiredValidator",
+                              "component": "VR_anual",
+                              "text": "VR_anual is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new ValorReferencium!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "radnetBD.createValorReferencium",
+                        "parameters": [
+                          {
+                            "name": "ValorReferencium",
+                            "value": "${valorreferencium}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${valorreferencium}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "data": "${valorreferencium}",
+                  "visible": "${valorreferencium != null}",
+                  "itemType": "Radnet.Models.RadnetBd.ValorReferencium"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "valorreferencium",
+        "type": "set",
+        "value": "new Radnet.Models.RadnetBd.ValorReferencium(){}",
+        "valueType": "Radnet.Models.RadnetBd.ValorReferencium"
+      }
+    ]
+  },
+  "name": "Add Valor Referencium",
+  "layout": "Main"
+}

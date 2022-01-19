@@ -1,0 +1,55 @@
+﻿@inherits Radnet.Layouts.MainLayoutComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Radnet.Models.RadnetBd
+<RadzenDialog />
+<RadzenNotification />
+<RadzenTooltip />
+<RadzenContextMenu />
+
+<RadzenHeader>
+  <ChildContent>
+    <div class="row justify-content-start align-items-center">
+      <div class="col-6 d-flex align-items-center">
+        <RadzenSidebarToggle Click="@SidebarToggle0Click">
+        </RadzenSidebarToggle>
+        <RadzenLabel Text="Radnet">
+        </RadzenLabel>
+      </div>
+      <div class="col-6 text-right">
+      </div>
+    </div>
+  </ChildContent>
+</RadzenHeader>
+<RadzenBody @ref="body0">
+  <ChildContent>
+    <RadzenContentContainer Name="main">
+    @Body
+    </RadzenContentContainer>
+  </ChildContent>
+</RadzenBody>
+<RadzenSidebar @ref="sidebar0">
+  <ChildContent>
+    <RadzenPanelMenu style="height: 100%">
+      <ChildContent>
+        <RadzenPanelMenuItem Text="Leitura" Path="leitura">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="Estacao" Path="estacao">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="GrauSensibilidade" Path="grau-sensibilidade">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="NivelRadiacao" Path="nivel-radiacao">
+        </RadzenPanelMenuItem>
+        <RadzenPanelMenuItem Text="ValorReferencium" Path="valor-referencium">
+        </RadzenPanelMenuItem>
+      </ChildContent>
+    </RadzenPanelMenu>
+  </ChildContent>
+</RadzenSidebar>
+<RadzenFooter>
+  <ChildContent>
+    <RadzenLabel Text="Radnet, Copyright Ⓒ 2022">
+    </RadzenLabel>
+  </ChildContent>
+</RadzenFooter>

@@ -1,0 +1,75 @@
+﻿@page "/add-estacao"
+@layout MainLayout
+@inherits Radnet.Pages.AddEstacaoComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Radnet.Models.RadnetBd
+<RadzenContent Container="main">
+  <ChildContent>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenTemplateForm Data="@estacao" Visible="@(estacao != null)" TItem="Radnet.Models.RadnetBd.Estacao" Submit="@Form0Submit">
+          <ChildContent>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Tipo Estacao" Component="tipo_estacao" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="30" style="display: block; width: 100%" @bind-Value="@(estacao.tipo_estacao)" Name="Tipo_estacao">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Tipo_estacao" Text="tipo_estacao is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Freq Leitura" Component="freq_leitura" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="20" style="display: block; width: 100%" @bind-Value="@(estacao.freq_leitura)" Name="Freq_leitura">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Freq_leitura" Text="freq_leitura is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Localizacao" Component="localizacao" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenTextBox MaxLength="50" style="display: block; width: 100%" @bind-Value="@(estacao.localizacao)" Name="Localizacao">
+                </RadzenTextBox>
+                <RadzenRequiredValidator Component="Localizacao" Text="localizacao is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div style="margin-bottom: 1rem" class="row">
+              <div class="col-md-3">
+                <RadzenLabel Text="Data Instalacao" Component="data_instalacao" style="width: 100%">
+                </RadzenLabel>
+              </div>
+              <div class="col-md-9">
+                <RadzenDatePicker style="display: block; width: 100%" @bind-Value="@(estacao.data_instalacao)" Name="Data_instalacao">
+                </RadzenDatePicker>
+                <RadzenRequiredValidator Component="Data_instalacao" Text="data_instalacao is required" style="position: absolute">
+                </RadzenRequiredValidator>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col offset-sm-3">
+                <RadzenButton ButtonType="ButtonType.Submit" Icon="save" Text="Save" ButtonStyle="ButtonStyle.Primary">
+                </RadzenButton>
+                <RadzenButton ButtonStyle="ButtonStyle.Light" style="margin-left: 1rem" Text="Cancel" Click="@Button2Click">
+                </RadzenButton>
+              </div>
+            </div>
+          </ChildContent>
+        </RadzenTemplateForm>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>

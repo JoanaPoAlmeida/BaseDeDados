@@ -1,0 +1,298 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "type": "template-form",
+                  "name": "form0",
+                  "components": [
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Tipo Estacao",
+                              "component": "tipo_estacao",
+                              "name": "tipo_estacaoLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 30,
+                              "type": "textbox",
+                              "name": "tipo_estacao",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${estacao.tipo_estacao}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "tipo_estacaoRequiredValidator",
+                              "component": "tipo_estacao",
+                              "text": "tipo_estacao is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Freq Leitura",
+                              "component": "freq_leitura",
+                              "name": "freq_leituraLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 20,
+                              "type": "textbox",
+                              "name": "freq_leitura",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${estacao.freq_leitura}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "freq_leituraRequiredValidator",
+                              "component": "freq_leitura",
+                              "text": "freq_leitura is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Localizacao",
+                              "component": "localizacao",
+                              "name": "localizacaoLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "string",
+                              "maxLength": 50,
+                              "type": "textbox",
+                              "name": "localizacao",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${estacao.localizacao}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "localizacaoRequiredValidator",
+                              "component": "localizacao",
+                              "text": "localizacao is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "style": {
+                        "marginBottom": "1rem"
+                      },
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col-md-3",
+                          "components": [
+                            {
+                              "type": "label",
+                              "text": "Data Instalacao",
+                              "component": "data_instalacao",
+                              "name": "data_instalacaoLabel",
+                              "style": {
+                                "width": "100%"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "col",
+                          "class": "col-md-9",
+                          "components": [
+                            {
+                              "valueType": "DateTime",
+                              "type": "datepicker",
+                              "name": "data_instalacao",
+                              "style": {
+                                "display": "block",
+                                "width": "100%"
+                              },
+                              "value": "${estacao.data_instalacao}"
+                            },
+                            {
+                              "type": "required-validator",
+                              "name": "data_instalacaoRequiredValidator",
+                              "component": "data_instalacao",
+                              "text": "data_instalacao is required",
+                              "style": {
+                                "position": "absolute"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "row",
+                      "components": [
+                        {
+                          "type": "col",
+                          "class": "col offset-sm-3",
+                          "components": [
+                            {
+                              "type": "button",
+                              "buttonType": "submit",
+                              "icon": "save",
+                              "text": "Save",
+                              "buttonStyle": "primary"
+                            },
+                            {
+                              "type": "button",
+                              "buttonStyle": "light",
+                              "style": {
+                                "marginLeft": "1rem"
+                              },
+                              "text": "Cancel",
+                              "events": {
+                                "click": [
+                                  {
+                                    "type": "close-popup"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "events": {
+                    "submit": [
+                      {
+                        "error": [
+                          {
+                            "detail": "Unable to create new Estacao!",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ],
+                        "name": "radnetBD.createEstacao",
+                        "parameters": [
+                          {
+                            "name": "Estacao",
+                            "value": "${estacao}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "type": "close-popup",
+                            "result": "${estacao}"
+                          }
+                        ],
+                        "type": "invoke"
+                      }
+                    ]
+                  },
+                  "data": "${estacao}",
+                  "visible": "${estacao != null}",
+                  "itemType": "Radnet.Models.RadnetBd.Estacao"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "name": "estacao",
+        "type": "set",
+        "value": "new Radnet.Models.RadnetBd.Estacao(){}",
+        "valueType": "Radnet.Models.RadnetBd.Estacao"
+      }
+    ]
+  },
+  "name": "Add Estacao",
+  "layout": "Main"
+}

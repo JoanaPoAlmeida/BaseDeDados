@@ -1,0 +1,31 @@
+﻿@page "/leitura"
+@layout MainLayout
+@inherits Radnet.Pages.LeituraComponent
+
+@using Radzen
+@using Radzen.Blazor
+@using Radnet.Models.RadnetBd
+<RadzenContent Container="main">
+  <ChildContent>
+    <RadzenHeading Size="H1" Text="Leitura">
+    </RadzenHeading>
+    <div class="row">
+      <div class="col-md-12">
+        <RadzenDataGrid @ref="grid0" AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" Data="@getLeiturasResult" TItem="Radnet.Models.RadnetBd.Leitura">
+          <Columns>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Leitura" Property="id_leitura" Title="Id Leitura">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Leitura" Property="data_leitura" FormatString="{0:d}" Title="Data Leitura">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Leitura" Property="hora_leitura" Title="Hora Leitura">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Leitura" Property="valor_leitura" Title="Valor Leitura">
+            </RadzenDataGridColumn>
+            <RadzenDataGridColumn TItem="Radnet.Models.RadnetBd.Leitura" Property="id_estacao" Title="Id Estacao">
+            </RadzenDataGridColumn>
+          </Columns>
+        </RadzenDataGrid>
+      </div>
+    </div>
+  </ChildContent>
+</RadzenContent>
