@@ -10,7 +10,6 @@ CREATE TABLE Estacao
   freq_leitura VARCHAR(20) NOT NULL,
   localizacao VARCHAR(50) NOT NULL,
   data_instalacao DATE NOT NULL,
-  numero_sensores INT NOT NULL,
   PRIMARY KEY (id_estacao)
 );
 
