@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class CacheInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (request.url.indexOf(environment.serverMethodsUrl) != 0) {
+    if (request.url.indexOf(environment.radnet) != 0 && request.url.indexOf(environment.serverMethodsUrl) != 0) {
       return next.handle(request);
     }
 

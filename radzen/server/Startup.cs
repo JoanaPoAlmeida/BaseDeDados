@@ -19,6 +19,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Hosting;
 
+using RadnetBd.Data;
 
 namespace RadnetBd
 {
@@ -76,6 +77,10 @@ namespace RadnetBd
 
       services.AddHttpContextAccessor();
 
+      services.AddDbContext<RadnetBd.Data.RadnetContext>(options =>
+      {
+        options.UseSqlServer(Configuration.GetConnectionString("radnetConnection"));
+      });
 
       OnConfigureServices(services);
     }
@@ -125,11 +130,19 @@ namespace RadnetBd
 
           var oDataBuilder = new ODataConventionModelBuilder(provider);
 
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.DboLeitura>("DboLeituras");
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.Estacao>("Estacaos");
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.GrauSensibilidade>("GrauSensibilidades");
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.Leitura>("Leituras");
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.NivelRadiacao>("NivelRadiacaos");
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.Sensor>("Sensors");
+          oDataBuilder.EntitySet<RadnetBd.Models.Radnet.ValorReferencium>("ValorReferencia");
 
           this.OnConfigureOData(oDataBuilder);
 
           var model = oDataBuilder.GetEdmModel();
 
+          builder.MapODataServiceRoute("odata/radnet", "odata/radnet", model);
 
       });
 

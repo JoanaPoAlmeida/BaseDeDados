@@ -1,0 +1,200 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "DboLeitura"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowDelete": false,
+                  "confirmDelete": false,
+                  "allowAdd": false,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getDboLeiturasCount}",
+                  "data": "${getDboLeiturasResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "radnet.getDboLeituras",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getDboLeiturasResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getDboLeiturasCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke",
+                        "error": [
+                          {
+                            "detail": "Unable to load DboLeituras",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "hora",
+                      "formatString": "medium",
+                      "title": "Hora",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "property": "Abrantes",
+                      "title": "Abrantes",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Beja",
+                      "title": "Beja",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Bragana",
+                      "title": "Braganca",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Castelo_Branco",
+                      "title": "Castelo Branco",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Coimbra",
+                      "title": "Coimbra",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Elvas",
+                      "title": "Elvas",
+                      "type": "string"
+                    },
+                    {
+                      "property": "vora",
+                      "title": "Evora",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Faro",
+                      "title": "Faro",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Funchal",
+                      "title": "Funchal",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Junqueira",
+                      "title": "Junqueira",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Lisboa",
+                      "title": "Lisboa",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Meimoa",
+                      "title": "Meimoa",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Penhas_Douradas",
+                      "title": "Penhas Douradas",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Pocinho",
+                      "title": "Pocinho",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Ponta_Delgada",
+                      "title": "Ponta Delgada",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Portalegre",
+                      "title": "Portalegre",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Porto",
+                      "title": "Porto",
+                      "type": "string"
+                    },
+                    {
+                      "property": "Sines",
+                      "title": "Sines",
+                      "type": "string"
+                    }
+                  ],
+                  "type": "grid"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "type": "execute",
+        "code": "this.grid0.load();"
+      }
+    ]
+  },
+  "name": "DboLeitura",
+  "layout": "Main"
+}

@@ -1,18 +1,26 @@
 {
-  "name": "radnetBD",
+  "dataSources": [
+    "radnet"
+  ],
   "generator": "@radzen/angular-generator",
-  "theme": "default",
-  "logo": "",
-  "pages": [],
+  "https": false,
   "layouts": [
     "Login",
     "Main"
   ],
-  "startPage": null,
-  "https": false,
-  "navigation": [],
-  "dataSources": [],
+  "logo": "",
+  "name": "radnetBD",
+  "navigation": [
+    "Leitura",
+    "DboLeitura"
+  ],
+  "pages": [
+    "Leitura",
+    "DboLeitura"
+  ],
+  "serverLang": "cs",
   "serverProject": true,
   "serverVersion": "5",
-  "serverLang": "cs"
+  "startPage": "Leitura",
+  "theme": "default"
 }

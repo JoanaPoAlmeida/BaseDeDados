@@ -1,4 +1,20 @@
 use radnetBD;
 
 INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Abrantes', '2016/06/12');
-
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Beja', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Bragança', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Castelo Branco', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Coimbra', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Elvas', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Alvora', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Faro', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Funchal', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Junqueira', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Lisboa', '2016/06/12');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Sines', '2010/06/16');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Porto', '2017/08/18');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Portalegre', '2018/05/15');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Ponta Delgada', '2017/07/17');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Pocinho', '2016/10/10');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Penhas Douradas', '2014/11/03');
+INSERT INTO estacao VALUES('fixa', 'hora a hora', 'Meimoa', '2015/01/20');

@@ -1,0 +1,1415 @@
+{
+  "info": {
+    "title": "radnet",
+    "x-type": "odata",
+    "x-connector": "mssql",
+    "x-connector-version": 14
+  },
+  "definitions": {
+    "DboLeitura": {
+      "x-table": "dbo.leitura",
+      "resource": "DboLeituras",
+      "required": [],
+      "properties": {
+        "hora": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "datetime2",
+          "x-key": true,
+          "x-virtual": true
+        },
+        "Abrantes": {
+          "type": "string",
+          "length": 50
+        },
+        "Beja": {
+          "type": "string",
+          "length": 50
+        },
+        "Bragana": {
+          "x-original-name": "Bragança",
+          "type": "string",
+          "length": 50
+        },
+        "Castelo_Branco": {
+          "type": "string",
+          "length": 50
+        },
+        "Coimbra": {
+          "type": "string",
+          "length": 50
+        },
+        "Elvas": {
+          "type": "string",
+          "length": 50
+        },
+        "vora": {
+          "x-original-name": "Évora",
+          "type": "string",
+          "length": 50
+        },
+        "Faro": {
+          "type": "string",
+          "length": 50
+        },
+        "Funchal": {
+          "type": "string",
+          "length": 50
+        },
+        "Junqueira": {
+          "type": "string",
+          "length": 50
+        },
+        "Lisboa": {
+          "type": "string",
+          "length": 50
+        },
+        "Meimoa": {
+          "type": "string",
+          "length": 50
+        },
+        "Penhas_Douradas": {
+          "type": "string",
+          "length": 50
+        },
+        "Pocinho": {
+          "type": "string",
+          "length": 50
+        },
+        "Ponta_Delgada": {
+          "type": "string",
+          "length": 50
+        },
+        "Portalegre": {
+          "type": "string",
+          "length": 50
+        },
+        "Porto": {
+          "type": "string",
+          "length": 50
+        },
+        "Sines": {
+          "type": "string",
+          "length": 50
+        }
+      },
+      "x-view": true
+    },
+    "Estacao": {
+      "x-table": "dbo.Estacao",
+      "resource": "Estacaos",
+      "required": [
+        "tipo_estacao",
+        "freq_leitura",
+        "localizacao",
+        "data_instalacao"
+      ],
+      "properties": {
+        "id_estacao": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Estacao",
+              "name": "Sensors",
+              "type": "Sensor"
+            }
+          ]
+        },
+        "tipo_estacao": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 30
+        },
+        "freq_leitura": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 20
+        },
+        "localizacao": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 50
+        },
+        "data_instalacao": {
+          "x-nullable": false,
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "date"
+        },
+        "Sensors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sensor"
+          }
+        }
+      }
+    },
+    "GrauSensibilidade": {
+      "x-table": "dbo.Grau__sensibilidade",
+      "resource": "GrauSensibilidades",
+      "required": [
+        "limite_maximo",
+        "limite_minimo"
+      ],
+      "properties": {
+        "id_Grau": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "GrauSensibilidade",
+              "name": "Sensors",
+              "type": "Sensor"
+            }
+          ]
+        },
+        "limite_maximo": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double"
+        },
+        "limite_minimo": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double"
+        },
+        "Sensors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sensor"
+          }
+        }
+      }
+    },
+    "Leitura": {
+      "x-table": "dbo.leituras",
+      "resource": "Leituras",
+      "required": [
+        "id_estacao"
+      ],
+      "properties": {
+        "id_leitura": {
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-key": true,
+          "x-virtual": true
+        },
+        "data_leitura": {
+          "type": "string",
+          "format": "date-time",
+          "x-datetime": "date"
+        },
+        "hora_leitura": {
+          "type": "string",
+          "format": "time"
+        },
+        "valor_leitura": {
+          "x-precision": 53,
+          "type": "number",
+          "format": "double"
+        },
+        "id_estacao": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        }
+      },
+      "x-view": true
+    },
+    "NivelRadiacao": {
+      "x-table": "dbo.nivel_radiacao",
+      "resource": "NivelRadiacaos",
+      "required": [
+        "freq_radiacao",
+        "id_sensor",
+        "id_referencia"
+      ],
+      "properties": {
+        "id_nivel": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "freq_radiacao": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer"
+        },
+        "Sensor": {
+          "type": "object",
+          "$ref": "#/definitions/Sensor"
+        },
+        "id_sensor": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Sensor",
+            "parentEntityType": "Sensor",
+            "type": "Sensor",
+            "principalKey": "id_sensor",
+            "name": "Sensor",
+            "textProperty": "tipo_sensor",
+            "navigationProperty": "NivelRadiacaos"
+          }
+        },
+        "ValorReferencium": {
+          "type": "object",
+          "$ref": "#/definitions/ValorReferencium"
+        },
+        "id_referencia": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "valor_referencia",
+            "parentEntityType": "ValorReferencium",
+            "type": "ValorReferencium",
+            "principalKey": "id_referencia",
+            "name": "ValorReferencium",
+            "textProperty": "id_referencia",
+            "navigationProperty": "NivelRadiacaos"
+          }
+        }
+      }
+    },
+    "Sensor": {
+      "x-table": "dbo.Sensor",
+      "resource": "Sensors",
+      "required": [
+        "tipo_sensor",
+        "id_Grau"
+      ],
+      "properties": {
+        "tipo_sensor": {
+          "x-nullable": false,
+          "type": "string",
+          "length": 10
+        },
+        "id_sensor": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "Sensor",
+              "name": "NivelRadiacaos",
+              "type": "NivelRadiacao"
+            }
+          ]
+        },
+        "Estacao": {
+          "type": "object",
+          "$ref": "#/definitions/Estacao"
+        },
+        "id_estacao": {
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Estacao",
+            "parentEntityType": "Estacao",
+            "type": "Estacao",
+            "principalKey": "id_estacao",
+            "name": "Estacao",
+            "textProperty": "tipo_estacao",
+            "navigationProperty": "Sensors"
+          }
+        },
+        "GrauSensibilidade": {
+          "type": "object",
+          "$ref": "#/definitions/GrauSensibilidade"
+        },
+        "id_Grau": {
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-foreignKey": {
+            "parentTable": "Grau__sensibilidade",
+            "parentEntityType": "GrauSensibilidade",
+            "type": "GrauSensibilidade",
+            "principalKey": "id_Grau",
+            "name": "GrauSensibilidade",
+            "textProperty": "id_Grau",
+            "navigationProperty": "Sensors"
+          }
+        },
+        "NivelRadiacaos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NivelRadiacao"
+          }
+        }
+      }
+    },
+    "ValorReferencium": {
+      "x-table": "dbo.valor_referencia",
+      "resource": "ValorReferencia",
+      "required": [
+        "VR_diario",
+        "VR_mensal",
+        "VR_anual"
+      ],
+      "properties": {
+        "id_referencia": {
+          "x-key": true,
+          "x-identity": true,
+          "x-nullable": false,
+          "x-precision": 10,
+          "type": "integer",
+          "x-navigation": [
+            {
+              "inversePropertyName": "ValorReferencium",
+              "name": "NivelRadiacaos",
+              "type": "NivelRadiacao"
+            }
+          ]
+        },
+        "VR_diario": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double"
+        },
+        "VR_mensal": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double"
+        },
+        "VR_anual": {
+          "x-nullable": false,
+          "x-precision": 53,
+          "type": "number",
+          "format": "double"
+        },
+        "NivelRadiacaos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NivelRadiacao"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/DboLeituras": {
+      "get": {
+        "operationId": "getDboLeituras",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/DboLeitura"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Estacaos": {
+      "get": {
+        "operationId": "getEstacaos",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Estacao"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createEstacao",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Estacao",
+            "schema": {
+              "$ref": "#/definitions/Estacao"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Estacao"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/GrauSensibilidades": {
+      "get": {
+        "operationId": "getGrauSensibilidades",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/GrauSensibilidade"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createGrauSensibilidade",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "GrauSensibilidade",
+            "schema": {
+              "$ref": "#/definitions/GrauSensibilidade"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/GrauSensibilidade"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Leituras": {
+      "get": {
+        "operationId": "getLeituras",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Leitura"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NivelRadiacaos": {
+      "get": {
+        "operationId": "getNivelRadiacaos",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/NivelRadiacao"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createNivelRadiacao",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "NivelRadiacao",
+            "schema": {
+              "$ref": "#/definitions/NivelRadiacao"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/NivelRadiacao"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Sensors": {
+      "get": {
+        "operationId": "getSensors",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/Sensor"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSensor",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Sensor",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/ValorReferencia": {
+      "get": {
+        "operationId": "getValorReferencia",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$filter",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "$orderby",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$count",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$format",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$select",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "properties": {
+                "value": {
+                  "items": {
+                    "$ref": "#/definitions/ValorReferencium"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createValorReferencium",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "ValorReferencium",
+            "schema": {
+              "$ref": "#/definitions/ValorReferencium"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/ValorReferencium"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Estacaos({id_estacao})": {
+      "delete": {
+        "operationId": "deleteEstacao",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_estacao",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getEstacaoByid_estacao",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_estacao",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Estacao"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateEstacao",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_estacao",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Estacao",
+            "schema": {
+              "$ref": "#/definitions/Estacao"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/GrauSensibilidades({id_Grau})": {
+      "delete": {
+        "operationId": "deleteGrauSensibilidade",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_Grau",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getGrauSensibilidadeByid_Grau",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_Grau",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/GrauSensibilidade"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateGrauSensibilidade",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_Grau",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "GrauSensibilidade",
+            "schema": {
+              "$ref": "#/definitions/GrauSensibilidade"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/NivelRadiacaos({id_nivel})": {
+      "delete": {
+        "operationId": "deleteNivelRadiacao",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_nivel",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getNivelRadiacaoByid_nivel",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_nivel",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/NivelRadiacao"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateNivelRadiacao",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_nivel",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "NivelRadiacao",
+            "schema": {
+              "$ref": "#/definitions/NivelRadiacao"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/Sensors({id_sensor})": {
+      "delete": {
+        "operationId": "deleteSensor",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_sensor",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getSensorByid_sensor",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_sensor",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateSensor",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_sensor",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "Sensor",
+            "schema": {
+              "$ref": "#/definitions/Sensor"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/ValorReferencia({id_referencia})": {
+      "delete": {
+        "operationId": "deleteValorReferencium",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id_referencia",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getValorReferenciumByid_referencia",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_referencia",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/ValorReferencium"
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateValorReferencium",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "$expand",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "id_referencia",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "ValorReferencium",
+            "schema": {
+              "$ref": "#/definitions/ValorReferencium"
+            }
+          }
+        ],
+        "responses": {
+          "204": {},
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "basePath": "/odata/radnet",
+  "host": "localhost:5000",
+  "schemes": [
+    "http"
+  ]
+}

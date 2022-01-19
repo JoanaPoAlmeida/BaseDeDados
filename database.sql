@@ -1,6 +1,6 @@
 --create database Radnet;
 
-use radnetBD
+use radnetBD;
 
 
 CREATE TABLE Estacao

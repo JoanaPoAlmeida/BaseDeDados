@@ -1,0 +1,132 @@
+{
+  "components": [
+    {
+      "type": "content",
+      "container": "main",
+      "components": [
+        {
+          "type": "heading",
+          "name": "pageTitle",
+          "size": "H1",
+          "text": "Leitura"
+        },
+        {
+          "type": "row",
+          "components": [
+            {
+              "type": "col",
+              "class": "col-md-12",
+              "components": [
+                {
+                  "name": "grid0",
+                  "allowDelete": false,
+                  "confirmDelete": false,
+                  "allowAdd": false,
+                  "allowFiltering": true,
+                  "allowMultiSorting": false,
+                  "allowPaging": true,
+                  "allowSorting": true,
+                  "count": "${getLeiturasCount}",
+                  "data": "${getLeiturasResult}",
+                  "events": {
+                    "loadData": [
+                      {
+                        "name": "radnet.getLeituras",
+                        "parameters": [
+                          {
+                            "name": "$top",
+                            "value": "event.top"
+                          },
+                          {
+                            "name": "$skip",
+                            "value": "event.skip"
+                          },
+                          {
+                            "name": "$count",
+                            "value": "event.top != null && event.skip != null"
+                          },
+                          {
+                            "name": "$filter",
+                            "value": "${event.filter}"
+                          },
+                          {
+                            "name": "$orderby",
+                            "value": "${event.orderby}"
+                          }
+                        ],
+                        "then": [
+                          {
+                            "name": "getLeiturasResult",
+                            "type": "set",
+                            "value": "${result.value}"
+                          },
+                          {
+                            "name": "getLeiturasCount",
+                            "type": "set",
+                            "value": "event.top != null && event.skip != null ? result['@odata.count'] : ${result.value.length}"
+                          }
+                        ],
+                        "type": "invoke",
+                        "error": [
+                          {
+                            "detail": "Unable to load Leituras",
+                            "severity": "error",
+                            "summary": "Error",
+                            "type": "notify"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "title": "",
+                  "columns": [
+                    {
+                      "property": "id_leitura",
+                      "title": "Id Leitura",
+                      "type": "integer"
+                    },
+                    {
+                      "property": "data_leitura",
+                      "formatString": "medium",
+                      "title": "Data Leitura",
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "property": "hora_leitura",
+                      "title": "Hora Leitura",
+                      "type": "string",
+                      "format": "time"
+                    },
+                    {
+                      "property": "valor_leitura",
+                      "title": "Valor Leitura",
+                      "type": "number",
+                      "format": "double"
+                    },
+                    {
+                      "property": "id_estacao",
+                      "title": "Id Estacao",
+                      "type": "integer"
+                    }
+                  ],
+                  "type": "grid"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "events": {
+    "load": [
+      {
+        "type": "execute",
+        "code": "this.grid0.load();"
+      }
+    ]
+  },
+  "name": "Leitura",
+  "layout": "Main"
+}

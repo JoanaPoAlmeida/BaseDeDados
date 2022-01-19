@@ -16,6 +16,9 @@ import { LabelModule } from '@radzen/angular/dist/label';
 import { SidebarModule } from '@radzen/angular/dist/sidebar';
 import { PanelMenuModule } from '@radzen/angular/dist/panelmenu';
 import { FooterModule } from '@radzen/angular/dist/footer';
+import { ContentModule } from '@radzen/angular/dist/content';
+import { HeadingModule } from '@radzen/angular/dist/heading';
+import { GridModule } from '@radzen/angular/dist/grid';
 import { SharedModule } from '@radzen/angular/dist/shared';
 import { NotificationModule } from '@radzen/angular/dist/notification';
 import { DialogModule } from '@radzen/angular/dist/dialog';
@@ -25,11 +28,16 @@ import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { CacheInterceptor } from './cache.interceptor';
 export { AppComponent } from './app.component';
+import { LeituraComponent } from './leitura/leitura.component';
+import { DboLeituraComponent } from './dbo-leitura/dbo-leitura.component';
 import { LoginLayoutComponent } from './login-layout/login-layout.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
+import { RadnetService } from './radnet.service';
 
 export const PageDeclarations = [
+  LeituraComponent,
+  DboLeituraComponent,
 ];
 
 export const LayoutDeclarations = [
@@ -49,6 +57,7 @@ export const AppProviders = [
     useClass: CacheInterceptor,
     multi: true
   },
+  RadnetService,
   ConfigService,
   {
     provide: APP_INITIALIZER,
@@ -72,6 +81,9 @@ export const AppImports = [
   SidebarModule,
   PanelMenuModule,
   FooterModule,
+  ContentModule,
+  HeadingModule,
+  GridModule,
   SharedModule,
   NotificationModule,
   DialogModule,

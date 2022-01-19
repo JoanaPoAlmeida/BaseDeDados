@@ -1,0 +1,48 @@
+<rz-content #content1 container="main">
+  <rz-heading #pageTitle size="H1" text="DboLeitura">
+  </rz-heading>
+  <div class="row">
+    <div class="col-md-12">
+      <rz-grid #grid0 [allowDelete]="false" [confirmDelete]="false" [allowAdd]="false" [allowFiltering]="true" [allowMultiSorting]="false" [allowPaging]="true" [allowSorting]="true" [count]="getDboLeiturasCount" [data]="getDboLeiturasResult" confirmDeleteText="Are you sure you want to delete this record?" confirmDeleteTitle="Confirmation" confirmDeleteOkText="Ok" confirmDeleteCancelText="Cancel" emptyText="No records to display." addText="Add" clearFilterText="Clear" applyFilterText="Apply" equalsText="Equals" notEqualsText="Not equals" lessThanText="Less than" lessThanOrEqualsText="Less than or equals" greaterThanText="Greater than" greaterThanOrEqualsText="Greater than or equals" endsWithText="Ends with" containsText="Contains" startsWithText="Starts with" (loadData)="grid0LoadData($event)">
+        <rz-grid-column property="hora" formatString="medium" title="Hora" format="date-time" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Abrantes" title="Abrantes" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Beja" title="Beja" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Bragana" title="Braganca" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Castelo_Branco" title="Castelo Branco" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Coimbra" title="Coimbra" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Elvas" title="Elvas" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="vora" title="Evora" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Faro" title="Faro" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Funchal" title="Funchal" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Junqueira" title="Junqueira" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Lisboa" title="Lisboa" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Meimoa" title="Meimoa" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Penhas_Douradas" title="Penhas Douradas" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Pocinho" title="Pocinho" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Ponta_Delgada" title="Ponta Delgada" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Portalegre" title="Portalegre" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Porto" title="Porto" type="string">
+        </rz-grid-column>
+        <rz-grid-column property="Sines" title="Sines" type="string">
+        </rz-grid-column>
+      </rz-grid>
+    </div>
+  </div>
+</rz-content>
